@@ -1,2 +1,2 @@
 # Cwiczenia02
-s17025
+Andrzej Leontiev, [23c], s17025
