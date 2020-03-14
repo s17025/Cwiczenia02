@@ -11,55 +11,55 @@ namespace Cw2
             try
             {
                 var path = @"d:\szkoła\apbd\cwiczenia02\zajęcia 2\dane.csv";
+
                 var stream = new StreamReader(File.OpenRead(path));
                 var lines = File.ReadLines(path);
+                string[] res;
+                var hash = new HashSet<Student>(new OwnComparer()); ;
 
+                
                 foreach (var line in lines)
                 {
-                    var Stud = new Student
+                    res = line.Split(',');
+                    if(line != string.Empty)
                     {
+                        var stud = new Student
+                        {
+                            fname = res[0],
+                            lname = res[1],
+                            studiesName = res[2],
+                            mode = res[3],
+                            indexNumber = res[4],
+                            birthdate = DateTime.Parse(res[5]),
+                            email = res[6],
+                            mothersName = res[7],
+                            fathersName = res[8]
 
-                    };
+                        };
+                        hash.Add(stud);
+                    }
+                    else
+                    {
+                        var log = res;
+                        System.IO.File.WriteAllLines(@"D:\Szkoła\APBD\Cwiczenia02\Cw2\Cw2\Log\log.txt", log);
+                    }
+                        
 
+                    
                 }
+                
+                
+
+                
             }
             catch (FileNotFoundException)
             {
                 Console.WriteLine("plik nie istnieje!");
+                System.IO.File.WriteAllText(@"D:\Szkoła\APBD\Cwiczenia02\Cw2\Cw2\Log\log.txt", "Plik nie istnieje!");
             }
-            catch (IOException)
-            {
-                throw;
-            }
+            
 
-            var hash = new HashSet<Student>(new OwnComparer());
-
-            var stud1 = new Student
-            {
-                fname = "Jan",
-                lname = "Kowalski",
-                indexNumber = "12345"
-            };
-
-            var stud2 = new Student
-            {
-                fname = "Jan",
-                lname = "Kowalski",
-                indexNumber = "12345"
-            };
-
-            var stud3 = new Student
-            {
-                fname = "Tomasz",
-                lname = "Nowak",
-                indexNumber = "012345"
-            };
-
-            hash.Add(stud1);
-            hash.Add(stud2);
-            hash.Add(stud3);
-
-            Console.WriteLine(hash.Count);   
+              
 
 
         }
